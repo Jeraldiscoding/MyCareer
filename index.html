@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Quest</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+</head>
+    <body>
+    <!-- Game Canvas -->
+    <canvas id="game-canvas" tabindex="0"></canvas>
+
+    <!-- UI Layer -->
+    <div id="ui-layer">
+        <!-- Wealth/Energy Dashboard -->
+        <div id="dashboard">
+            <div class="dashboard-title">Career Quest</div>
+            <div class="dashboard-item">
+                <span class="icon">💰</span>
+                <span id="wealth">0</span>
+            </div>
+            <div class="dashboard-item">
+                <span class="icon">⚡</span>
+                <span id="energy">100</span>
+            </div>
+        </div>
+
+        <div id="interaction-prompt" class="prompt hidden"></div>
+        <div id="rest-prompt" class="prompt hidden"></div>
+
+        <div id="lobby-modal" class="modal hidden">
+            <div class="modal-content info-enabled lobby-redesign">
+                <h2 id="lobby-title">Industry Lobby</h2>
+                <div id="lobby-info-content" class="lobby-info-content"></div>
+                <!-- The new Job Cards UI -->
+                <div id="lobby-job-cards" class="lobby-job-cards">
+                    <!-- Job 1 Card -->
+                    <div class="job-card">
+                        <h3 id="job1-title">Job 1</h3>
+                        <p id="job1-desc" class="job-desc">Description</p>
+                        <button id="lobby-primary-btn">Start Job 1</button>
+                    </div>
+                    <!-- Job 2 Card -->
+                    <div class="job-card">
+                        <h3 id="job2-title">Job 2</h3>
+                        <p id="job2-desc" class="job-desc">Description</p>
+                        <button id="lobby-secondary-btn">Start Job 2</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paycheck Modal -->
+        <div id="paycheck-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Paycheck Received</h2>
+                <p class="paycheck-line">Base Pay: <span id="paycheck-base">$0</span></p>
+                <p class="paycheck-line">Performance Bonus: <span id="paycheck-bonus">$0</span></p>
+                <p class="paycheck-total">Total Earned: <span id="paycheck-total">$0</span></p>
+                <button id="close-paycheck-btn">Continue</button>
+            </div>
+        </div>
+
+        <!-- Minigame HUD Overlay -->
+        <div id="minigame-hud" class="hidden">
+            <div id="minigame-header">
+                <h2 id="minigame-title">Job Title</h2>
+                <div id="minigame-score">Score: 0</div>
+            </div>
+            <div id="minigame-instruction">Instructions go here.</div>
+        </div>
+        
+        <!-- Notifications -->
+        <div id="notifications" class="notification-container"></div>
+    </div>
+
+    <script src="https://unpkg.com/kaboom@3000.0.1/dist/kaboom.js"></script>
+    <script>
+        kaboom({
+            global: true,
+            canvas: document.getElementById("game-canvas"),
+            background: [100, 180, 80], // Nature green background
+            width: window.innerWidth,
+            height: window.innerHeight,
+            font: "monospace", // kaplay default font update to look more like simple code, wait kaplay has fonts, we will load our own if needed.
+        });
+
+        document.getElementById("game-canvas").focus();
+        
+        window.addEventListener("click", () => {
+            document.getElementById("game-canvas").focus();
+        });
+
+        // Kaplay automatically resizes the canvas, removing manual DOM overrides 
+        // to immediately halt the lag/stutter loop on window changes.
+    </script>
+
+    <script type="module" src="./src/globals.js"></script>
+    <script type="module" src="./src/asset-manager.js"></script>
+    <script type="module" src="./src/ui-controls.js"></script>
+    <script type="module" src="./src/industries/industry-utils.js"></script>
+    <script type="module" src="./src/industries/finance.js"></script>
+    <script type="module" src="./src/industries/technology.js"></script>
+    <script type="module" src="./src/industries/healthcare.js"></script>
+    <script type="module" src="./src/industries/engineering.js"></script>
+    <script type="module" src="./src/industries/creative.js"></script>
+    <script type="module" src="./src/overworld.js"></script>
+    <!-- Include other industry scripts as needed -->
+</body>
+</html>
